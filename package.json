@@ -18,5 +18,8 @@
     "reader"
   ],
   "author": "Mohamad Elawadi",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "odbc": "^1.2.0"
+  }
 }
