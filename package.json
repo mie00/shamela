@@ -1,0 +1,22 @@
+{
+  "name": "shamela",
+  "version": "0.0.1",
+  "description": "shamela book reader",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/mie00/shamela"
+  },
+  "keywords": [
+    "shamela",
+    "islamic",
+    "books",
+    "book",
+    "reader"
+  ],
+  "author": "Mohamad Elawadi",
+  "license": "MIT"
+}
