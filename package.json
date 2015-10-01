@@ -4,7 +4,7 @@
   "description": "shamela book reader",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
