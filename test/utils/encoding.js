@@ -19,4 +19,15 @@ describe('Encoding module', function() {
         	encoding.arToUTF('\xc3\xd3\0\xc3\xc3').should.equal('أس');
         });
     });
+    describe('UTFToAr function', function() {
+        it('should convert UTF-8 strings to Windows-1256 strings', function() {
+            encoding.UTFToAr('أس').should.equal('\xc3\xd3');
+        });
+        it('should reverse UTFToAr in case of non nul chars', function() {
+            var a = ['أب','حمحم','خشىسي خشسيىشسي خخسش ي']
+            a.should.matchEach(function(x){
+                encoding.arToUTF(encoding.UTFToAr(x)).should.equal(x)
+            })
+        });
+    });
 });
