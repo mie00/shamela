@@ -74,12 +74,16 @@ var Book = module.exports = function(id, options, callback) {
         }, callback));
     };
     self.getWithId = function(id, callback) {
-        db.query(util.format("SELECT * FROM book where id=%d \0", id), cb(function(res) {
-        	map(res,function(x,y){
-        		y.nass = arToUTF(y.nass);
-        	});
-            return (res.length == 0) ? null : res[0];
-        }, callback));
+        db.query(util.format("SELECT * FROM book where id=%d \0", id), function(err, res) {
+            if (err) callback(err);
+            else if (res.length == 0) callback(new Error('id not matched'));
+            else {
+                map(res, function(x, y) {
+                    y.nass = arToUTF(y.nass);
+                });
+                callback(null, res[0]);
+            }
+        });
     }
     self.goto = function(criteriaObj, callback) {
         self.getStartId(criteriaObj, function(err, id) {

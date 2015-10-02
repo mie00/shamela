@@ -88,12 +88,12 @@ describe('Book model', function() {
             book.getWithId(49, function(err, res) {
                 // res.should.not.be.empty();
                 // res.should.matchEach(function(res) {
-                    res.should.be.an.Object();
-                    res.should.have.ownProperty('id');
-                    res.id.should.be.a.Number();
-                    res.id.should.equal(49);
-                    res.should.have.ownProperty('nass');
-                    res.nass.should.be.a.String();
+                res.should.be.an.Object();
+                res.should.have.ownProperty('id');
+                res.id.should.be.a.Number();
+                res.id.should.equal(49);
+                res.should.have.ownProperty('nass');
+                res.nass.should.be.a.String();
                 // });
                 done(err)
             })
@@ -102,19 +102,19 @@ describe('Book model', function() {
             book.getWithId(49, function(err, res) {
                 // res.should.not.be.empty();
                 // res.should.matchEach(function(res) {
-                    res.should.have.ownProperty('nass');
-                    res.nass.should.be.a.String();
-                    isNotAr(res.nass).should.be.true()
+                res.should.have.ownProperty('nass');
+                res.nass.should.be.a.String();
+                isNotAr(res.nass).should.be.true()
 
                 // });
                 done(err)
             })
         });
-        it('should return null when id not matched', function(done) {
+        it('should return an error when id not matched', function(done) {
             book.getWithId(-1, function(err, res) {
                 // res.should.be.empty();
-                should(res).be.null();
-                done(err)
+                err.should.not.be.null();
+                done()
             })
         });
         it('should get page with a specific criteria', function(done) {
@@ -125,9 +125,9 @@ describe('Book model', function() {
             }, function(err, res) {
                 // res.should.not.be.empty();
                 // res.should.matchEach(function(res) {
-                    res.should.be.an.Object();
-                    res.should.have.ownProperty('id');
-                    res.id.should.equal(49);
+                res.should.be.an.Object();
+                res.should.have.ownProperty('id');
+                res.id.should.equal(49);
                 // });
                 done(err)
             })
@@ -137,9 +137,9 @@ describe('Book model', function() {
             book.goto({}, function(err, res) {
                 // res.should.not.be.empty();
                 // res.should.matchEach(function(res) {
-                    res.should.be.an.Object();
-                    res.should.have.ownProperty('id');
-                    res.id.should.equal(4);
+                res.should.be.an.Object();
+                res.should.have.ownProperty('id');
+                res.id.should.equal(4);
                 // });
                 done(err)
             })
