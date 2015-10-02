@@ -14,5 +14,9 @@ describe('Encoding module', function() {
         it('should convert Windows-1256 strings to UTF-8 strings', function() {
         	encoding.arToUTF('\xc3\xd3').should.equal('أس');
         });
+        it('should ignore what\'s after null carachter', function() {
+        	encoding.arToUTF('\xc3\xd3').should.equal('أس');
+        	encoding.arToUTF('\xc3\xd3\0\xc3\xc3').should.equal('أس');
+        });
     });
 });
