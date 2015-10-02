@@ -67,7 +67,7 @@ var Book = module.exports = function(id, options, callback) {
         var criteria = map(obj, function(x, y) {
             return util.format('%s = %s', x, y)
         }).join(' AND ');
-        db.query(util.format("SELECT id FROM book where %s \0", criteria), cb(function(res) {
+        db.query(util.format("SELECT id FROM book %s %s \0", criteria && 'where', criteria), cb(function(res) {
             return Math.min.apply(Math, res.map(function(res) {
                 return res.id
             }))
@@ -75,11 +75,14 @@ var Book = module.exports = function(id, options, callback) {
     };
     self.getWithId = function(id, callback) {
         db.query(util.format("SELECT * FROM book where id=%d \0", id), cb(function(res) {
-            return res;
+        	map(res,function(x,y){
+        		y.nass = arToUTF(y.nass);
+        	});
+            return (res.length == 0) ? null : res[0];
         }, callback));
     }
     self.goto = function(criteriaObj, callback) {
-        self.getStartId(criteriaObj, function(err,id) {
+        self.getStartId(criteriaObj, function(err, id) {
             self.getWithId(id, cb(function(x) {
                 return x;
             }, callback))

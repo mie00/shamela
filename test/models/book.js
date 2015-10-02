@@ -84,17 +84,36 @@ describe('Book model', function() {
                 done(res != 49);
             })
         });
-        it('should get a specific id', function(done) {
+        it('should get a page with specific id', function(done) {
             book.getWithId(49, function(err, res) {
-                res.should.not.be.empty();
-                res.should.matchEach(function(res) {
+                // res.should.not.be.empty();
+                // res.should.matchEach(function(res) {
                     res.should.be.an.Object();
                     res.should.have.ownProperty('id');
                     res.id.should.be.a.Number();
                     res.id.should.equal(49);
                     res.should.have.ownProperty('nass');
                     res.nass.should.be.a.String();
-                });
+                // });
+                done(err)
+            })
+        });
+        it('should get a page with the right encoding', function(done) {
+            book.getWithId(49, function(err, res) {
+                // res.should.not.be.empty();
+                // res.should.matchEach(function(res) {
+                    res.should.have.ownProperty('nass');
+                    res.nass.should.be.a.String();
+                    isNotAr(res.nass).should.be.true()
+
+                // });
+                done(err)
+            })
+        });
+        it('should return null when id not matched', function(done) {
+            book.getWithId(-1, function(err, res) {
+                // res.should.be.empty();
+                should(res).be.null();
                 done(err)
             })
         });
@@ -104,13 +123,24 @@ describe('Book model', function() {
                 part: 1,
                 page: 10
             }, function(err, res) {
-                console.log(res)
-                res.should.not.be.empty();
-                res.should.matchEach(function(res) {
+                // res.should.not.be.empty();
+                // res.should.matchEach(function(res) {
                     res.should.be.an.Object();
                     res.should.have.ownProperty('id');
                     res.id.should.equal(49);
-                });
+                // });
+                done(err)
+            })
+        });
+        it('should get the first page with no criteria', function(done) {
+            this.slow()
+            book.goto({}, function(err, res) {
+                // res.should.not.be.empty();
+                // res.should.matchEach(function(res) {
+                    res.should.be.an.Object();
+                    res.should.have.ownProperty('id');
+                    res.id.should.equal(4);
+                // });
                 done(err)
             })
         });
