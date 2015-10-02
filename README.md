@@ -1,16 +1,27 @@
 #installation
 
-1. install mdb-tools
+1. mdb-tools src/odbc/odbc.c
 
-    with ./configure --with-unixodbc=/usr/local
+    change `len - stmt->pos` to `len - stmt->pos + 1`
 
-2. npm install
-3. node_modules/odbc/lib/odbc.js
+2. install mdb-tools
 
-    //moreResults = result.moreResultsSync();
+    ```bash
+    ./configure --with-unixodbc=/usr/local
+    make
+    make install
+    ```
 
-    moreResults = false;
-
+3. npm install
 4. node_modules/odbc/lib/odbc.js
 
-    \#        'UNICODE'
+    comment this `//moreResults = result.moreResultsSync();`
+
+    add this `moreResults = false;`
+
+5. node_modules/odbc/binding.gyp
+
+    comment this `#        'UNICODE'`
+
+6. npm install at odbc
+    
