@@ -12,6 +12,18 @@
     make install
     ```
 
+4. add this to /etc/odbcinst.ini
+
+    ```
+    [MDB]
+	Description     = MDB tools odbc
+	Driver      = libmdbodbc.so
+	setup       = libmdbodbc.so
+	Driver64    = libmdbodbc.so
+	Setup64     = libmdbodbc.so
+	FileUsage   = 1
+	```
+
 3. npm install
 4. node_modules/odbc/lib/odbc.js
 
