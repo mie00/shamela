@@ -1,7 +1,7 @@
 process.chdir(__dirname);
 
 var db = require('odbc')(),
-    cn = 'DRIVER={MDB};DBQ=3685.mdb';
+    cn = 'DRIVER={MDB};DBQ=3685111.mdb';
 describe('ODBC', function() {
     describe('with mdb-driver', function() {
         it('should connect sync', function(done) {

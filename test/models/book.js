@@ -10,21 +10,23 @@ config.dir = './Shamela-mock'
 describe('Book model', function() {
     describe('constructor', function() {
         it('should return the book object', function(done) {
-            var book = Book(4685, {}, function(err, res) {
+            var book = Book(3685, {}, function(err, res) {
                 done(res != book)
+                res.close(function() {});
             });
         });
         it('should execute the callback', function(done) {
-            var book = Book(4685, {}, function(err, res) {
+            var book = Book(3685, {}, function(err, res) {
                 done();
                 res.close(function() {});
             });
         });
         it('should accept custom book dirs', function(done) {
-            Book(3685, {
+            Book(3685111, {
                 dir: './'
             }, function(err, res) {
                 done(err);
+                res.close(function() {});
             })
         });
     });
@@ -36,6 +38,9 @@ describe('Book model', function() {
                 book = res;
                 done(err);
             })
+        })
+        after(function(done) {
+            book.close(done);
         })
         it('should get all titles with ids', function(done) {
             book.titles(function(err, res) {
@@ -145,7 +150,7 @@ describe('Book model', function() {
             })
         });
         it('should be closable', function(done) {
-            var book = Book(4685, {}, function(err, res) {
+            var book = Book(3685, {}, function(err, res) {
                 res.close(function() {
                     book.is_opened.should.be.false();
                     should(err).be.null();
